@@ -19,7 +19,7 @@ function App() {
           <div className="content__items">
             {pizzas.map((pizza) => {
               // return <PizzaBlock title={pizza.title} price={pizza.price} />;
-              return <PizzaBlock {...pizza} />;
+              return <PizzaBlock key={pizza.id} {...pizza} />;
             })}
           </div>
         </div>
