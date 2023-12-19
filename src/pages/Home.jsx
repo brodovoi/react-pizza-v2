@@ -36,21 +36,42 @@ const Home = () => {
     dispatch(setCurrentPage(number));
   };
 
-  const fetchPizzas = () => {
+  const fetchPizzas = async () => {
     setIsLoading(true);
+
     const sortBy = sort.sortProperty.replace('-', '');
     const order = sort.sortProperty.includes('-') ? 'ask' : 'desc';
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    axios
-      .get(
+    // Promise
+    // await axios
+    //   .get(
+    //     `https://6574c5a3b2fbb8f6509ca5cb.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+    //   )
+    //   .then((res) => {
+    //     setItems(res.data);
+    //     setIsLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     console.log('Axios error: ', error);
+    //   });
+
+    // Async  Await
+
+    try {
+      const res = await axios.get(
         `https://6574c5a3b2fbb8f6509ca5cb.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
-      )
-      .then((res) => {
-        setItems(res.data);
-        setIsLoading(false);
-      });
+      );
+      setItems(res.data);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log('Error: ', error);
+    } finally {
+    }
+
+    window.scrollTo(0, 0);
   };
 
   useEffect(() => {
