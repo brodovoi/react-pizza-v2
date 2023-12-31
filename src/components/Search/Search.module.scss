@@ -5,11 +5,11 @@
 
 .input {
   border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 12px 40px;
-  width: 300px;
+  padding: 12px 20px;
+  padding-left: 42px;
+  width: 400px;
   border-radius: 10px;
   font-size: 16px;
-  transition: width 0.15s ease-in-out;
 
   &:focus {
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -25,7 +25,7 @@
   top: 12px;
 }
 
-.clear {
+.clearIcon {
   width: 18px;
   height: 18px;
   opacity: 0.3;

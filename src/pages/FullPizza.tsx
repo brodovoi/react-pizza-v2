@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const FullPizza: React.FC = () => {
-  const [pizza, setPizza] = useState<{
+  const [pizza, setPizza] = React.useState<{
     imageUrl: string;
     title: string;
     price: number;
@@ -12,7 +13,7 @@ const FullPizza: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
+  React.useEffect(() => {
     async function fetchPizza() {
       try {
         const { data } = await axios.get(
@@ -24,18 +25,24 @@ const FullPizza: React.FC = () => {
         navigate('/');
       }
     }
+
     fetchPizza();
   }, []);
 
   if (!pizza) {
-    return <>'Загрузка...'</>;
+    return <>Загрузка...</>;
   }
 
   return (
     <div className="container">
-      <img src={pizza.imageUrl} alt="" />
+      <img src={pizza.imageUrl} />
       <h2>{pizza.title}</h2>
-      <h4>{pizza.price} грн</h4>
+      <h4>{pizza.price} ₽</h4>
+      <Link to="/">
+        <button className="button button--outline button--add">
+          <span>Назад</span>
+        </button>
+      </Link>
     </div>
   );
 };

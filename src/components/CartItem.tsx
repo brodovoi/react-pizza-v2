@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addItem, minusItem, removeItem } from '../redux/slices/cartSlice';
+import { addItem, minusItem, removeItem } from '../redux/cart/slice';
+import { CartItem as CartItemType } from '../redux/cart/types';
 
 type CartItemProps = {
   id: string;
@@ -12,7 +13,7 @@ type CartItemProps = {
   imageUrl: string;
 };
 
-const CartItem: React.FC<CartItemProps> = ({
+export const CartItem: React.FC<CartItemProps> = ({
   id,
   title,
   type,
@@ -27,7 +28,7 @@ const CartItem: React.FC<CartItemProps> = ({
     dispatch(
       addItem({
         id,
-      })
+      } as CartItemType)
     );
   };
 
@@ -54,7 +55,7 @@ const CartItem: React.FC<CartItemProps> = ({
       </div>
       <div className="cart__item-count">
         <button
-          //   disabled={count === 1}
+          disabled={count === 1}
           onClick={onClickMinus}
           className="button button--outline button--circle cart__item-count-minus">
           <svg
@@ -91,7 +92,7 @@ const CartItem: React.FC<CartItemProps> = ({
         </button>
       </div>
       <div className="cart__item-price">
-        <b>{price * count} грн</b>
+        <b>{price * count} ₽</b>
       </div>
       <div className="cart__item-remove">
         <div
@@ -115,5 +116,3 @@ const CartItem: React.FC<CartItemProps> = ({
     </div>
   );
 };
-
-export default CartItem;
